@@ -44,9 +44,9 @@ Once application is running, the following options can be used to request the en
 ### Starting the application
 #### Option 1 (Run JAVA exe jar file)
 1. Download the jar file from https://github.com/AlarkaSanyal/products-api-services/blob/master/target/products-api-services-1.0-SNAPSHOT.jar
-2. Opn a terminal window and run the following command
+2. Open a terminal window and run the following command
 ```
-\products-api-services>java -jar target\products-api-services-1.0-SNAPSHOT.jar
+\products-api-services>java -jar products-api-services-1.0-SNAPSHOT.jar
 ```
 #### Option 2 (From terminal window)
 1. Clone the code to your local repository from https://github.com/AlarkaSanyal/products-api-services
