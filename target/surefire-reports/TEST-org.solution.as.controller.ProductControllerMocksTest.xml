@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.solution.as.controller.ProductControllerMocksTest" time="0.519" tests="11" errors="0" skipped="0" failures="0">
+<testsuite name="org.solution.as.controller.ProductControllerMocksTest" time="0.608" tests="11" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_121\jre\bin"/>
@@ -62,15 +62,15 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="test_updateProductPrice_ok" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.077"/>
+  <testcase name="test_updateProductPrice_ok" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.094"/>
   <testcase name="test_updateProductPrice_withNullPriceValue_BadRequest" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.072"/>
-  <testcase name="test_updateProductPrice_withInvalidPriceValue_BadRequest" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.044"/>
-  <testcase name="test_getProduct_ok" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.028"/>
-  <testcase name="test_updateProductPrice_withNullPriceCurrencyCode_BadRequest" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.039"/>
-  <testcase name="test_updateProductPrice_withInvalidPriceCurrencyCode_BadRequest" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.047"/>
-  <testcase name="test_getProduct_notFound" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.037"/>
-  <testcase name="test_updateProductPrice_withoutName_ok" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.044"/>
-  <testcase name="test_updateProductPrice_withPriceCurrencyCode_caseSensitive_BadRequest" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.048"/>
-  <testcase name="test_updateProductPrice_idNotMatching_NotModified" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.042"/>
-  <testcase name="test_updateProductPrice_idNotFound_NotModified" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.041"/>
+  <testcase name="test_updateProductPrice_withInvalidPriceValue_BadRequest" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.07"/>
+  <testcase name="test_getProduct_ok" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.053"/>
+  <testcase name="test_updateProductPrice_withNullPriceCurrencyCode_BadRequest" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.053"/>
+  <testcase name="test_updateProductPrice_withInvalidPriceCurrencyCode_BadRequest" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.049"/>
+  <testcase name="test_getProduct_notFound" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.025"/>
+  <testcase name="test_updateProductPrice_withoutName_ok" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.047"/>
+  <testcase name="test_updateProductPrice_withPriceCurrencyCode_caseSensitive_BadRequest" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.044"/>
+  <testcase name="test_updateProductPrice_idNotMatching_NotModified" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.053"/>
+  <testcase name="test_updateProductPrice_idNotFound_NotModified" classname="org.solution.as.controller.ProductControllerMocksTest" time="0.048"/>
 </testsuite>
