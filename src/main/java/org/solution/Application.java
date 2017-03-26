@@ -16,7 +16,7 @@ public class Application
 {
     public static void main( String[] args ) throws Exception
     {
-    	System.setProperty("server.port", "8014");
+    	//System.setProperty("server.port", "8014");
         SpringApplication.run(Application.class, args);
     }
     
