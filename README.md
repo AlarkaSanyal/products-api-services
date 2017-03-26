@@ -12,7 +12,7 @@ Delivers product data as JSON.
      * Response: {"id":13860428,"name":"The Big Lebowski (Blu-ray)","current_price":{"value":16.65,"currencycode":"USD"}}
      
 ### PUT
-Updates a product’s price in the data store.
+Updates a product’s price in the database.
 
     ** URL: /api/products/{id}
     ** URL Params: id=[number]
@@ -23,7 +23,7 @@ Updates a product’s price in the data store.
      * Request body: {"id":13860428,"name":"The Big Lebowski (Blu-ray)","current_price":{"value":29.50,"currencycode":"USD"}}
      * Response: {"message":"Price has been updated"}
 
-#### Response codes
+### Response codes
 * **200 OK** : Product is found/updated
 * **404 Not Found**: Product is not found in database
 * **304 Not modified**: Product price is not updated
@@ -34,4 +34,4 @@ Updates a product’s price in the data store.
 * Cassandra is installed
 
 ## Notes
-Tomcat server port is set to 8014. This can be changed in resources/config/application.properties file.
+Tomcat server port is set to 8014. This can be changed in *resources/config/application.properties* file.
