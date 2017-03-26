@@ -12,7 +12,7 @@ import org.solution.as.model.Price;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * @author Alarka
+ * This class tests that data is present in the database and the application has access to perform updates and deletes.  
  * 
  * Data added to TABLE price at start of application
  * 
@@ -31,30 +31,42 @@ public class PriceRepositoryTest extends AbstractTest {
 	@Autowired
 	private PriceRepository priceRepository;
 	
+	/**
+	 * This tests that an items are present in the database
+	 */
 	@Test
 	public void test_findPrices() {
 		Collection<Price> prices = priceRepository.findPrices();
 		assertEquals("Expected count: ", 6, prices.size());
 	}
 	
+	/**
+	 * This tests that an item can be retrieved from the database
+	 */
 	@Test
 	public void test_findPriceById() {
 		Price price = priceRepository.findPriceById(new BigInteger("16696652"));
-		assertEquals("Expected currency code: ", "USD", price.getCurrencycode());
+		assertEquals("Expected currency code: ", "USD", price.getCurrency_code());
 		assertEquals("Expected value: ", new BigDecimal("0.75"), price.getValue());
 	}
 	
+	/**
+	 * This tests that an item can be inserted to the database
+	 */
 	@Test
 	public void test_insertPriceById() {
 		priceRepository.insertPriceById(new BigInteger("123456789"), new BigDecimal("50.50"), "USD");
 		Price price = priceRepository.findPriceById(new BigInteger("123456789"));
-		assertEquals("Expected currency code: ", "USD", price.getCurrencycode());
+		assertEquals("Expected currency code: ", "USD", price.getCurrency_code());
 		assertEquals("Expected value: ", new BigDecimal("50.50"), price.getValue());
 		
 		// Rollback
 		priceRepository.deletePriceById(new BigInteger("123456789"));
 	}
 	
+	/**
+	 * This tests that an item can be deleted from the database
+	 */
 	@Test
 	public void test_deletePriceById() {
 		priceRepository.deletePriceById(new BigInteger("16696652"));

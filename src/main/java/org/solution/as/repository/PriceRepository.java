@@ -8,6 +8,11 @@ import org.solution.as.model.Price;
 import org.springframework.data.cassandra.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+/**
+ * This interface is used to retrieve/update data from database.
+ *
+ */
+
 public interface PriceRepository extends CrudRepository<Price, String> {
 
 	@Query("SELECT * FROM price WHERE id=?0")
@@ -19,6 +24,6 @@ public interface PriceRepository extends CrudRepository<Price, String> {
 	@Query("DELETE FROM price WHERE id=?0")
 	public void deletePriceById(BigInteger id);
 	
-	@Query("INSERT INTO price (id, value, currencycode) VALUES (?0, ?1, ?2)")
-	public Price insertPriceById(BigInteger id, BigDecimal value, String currencycode);
+	@Query("INSERT INTO price (id, value, currency_code) VALUES (?0, ?1, ?2)")
+	public Price insertPriceById(BigInteger id, BigDecimal value, String currency_code);
 }

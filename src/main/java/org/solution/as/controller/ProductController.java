@@ -22,12 +22,25 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+/**
+ * This is the main controller class. 
+ *
+ */
+
 @RestController
 public class ProductController {
 
 	@Autowired
 	private ProductService productService;
 	
+	/**
+	 * This method retrieves a Product
+	 * @param id
+	 * @return Product object
+	 * @throws JsonProcessingException
+	 * @throws IOException
+	 * @throws MethodArgumentTypeMismatchException
+	 */
 	@RequestMapping(value="/api/products/{id}",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Product> getProduct(@PathVariable("id") BigInteger id) throws JsonProcessingException, IOException, MethodArgumentTypeMismatchException {
 		Product product = productService.findProductById(id);
@@ -37,6 +50,14 @@ public class ProductController {
 		return new ResponseEntity<Product>(product, HttpStatus.OK);
 	}
 	
+	/**
+	 * This method updates the price of a product
+	 * @param id
+	 * @param product
+	 * @return
+	 * @throws HttpMessageNotReadableException
+	 * @throws MethodArgumentNotValidException
+	 */
 	@RequestMapping(value="/api/products/{id}",method=RequestMethod.PUT,consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Product> updateProductPrice(@PathVariable("id") BigInteger id, @Valid @RequestBody Product product) throws HttpMessageNotReadableException, MethodArgumentNotValidException {
 		if (!id.equals(product.getId())) {

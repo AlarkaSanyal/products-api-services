@@ -7,7 +7,7 @@ import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.context.annotation.Bean;
 
 /**
- * Products API main Application
+ * Products API main Application.
  *
  */
 

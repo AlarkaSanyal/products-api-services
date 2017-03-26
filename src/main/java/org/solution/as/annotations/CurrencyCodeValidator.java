@@ -5,6 +5,11 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.apache.commons.lang3.EnumUtils;
 
+/**
+ * This class validates the format of currency_code.
+ *
+ */
+
 public class CurrencyCodeValidator implements ConstraintValidator<AcceptableCurrencyCode, String> {
 
 	@Override

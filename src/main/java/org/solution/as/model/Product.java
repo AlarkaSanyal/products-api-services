@@ -9,6 +9,11 @@ import org.solution.as.common.Constants;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+/** 
+ * This class represents a Product.
+ * 
+ */
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Product {
 
@@ -26,11 +31,20 @@ public class Product {
 	public Product() {
 		
 	}
-	
+	/**
+	 * This constructs a Product with just a message 
+	 * @param message
+	 */
 	public Product(String message) {
 		this.message = message;
 	}
 
+	/**
+	 * This constructs a Product with id, name and Price
+	 * @param id
+	 * @param name
+	 * @param current_price
+	 */
 	public Product(BigInteger id, String name, Price current_price) {
 		this.id = id;
 		this.name = name;

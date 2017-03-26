@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 /**
- * @author Alarka
+ * This class tests the service class.
  * 
  * Data added to TABLE price at start of application
  * 
@@ -48,19 +48,34 @@ public class ProductServiceTest extends AbstractTest {
 		service.emptyCache();
 	}
 	
+	/**
+	 * This tests the scenario when a Product is found 
+	 * @throws JsonProcessingException
+	 * @throws IOException
+	 */
 	@Test
 	public void test_findProductById() throws JsonProcessingException, IOException {
 		Product product = service.findProductById(new BigInteger("16696652"));
-		assertEquals("Expected currency code: ", "USD", product.getCurrent_price().getCurrencycode());
+		assertEquals("Expected currency code: ", "USD", product.getCurrent_price().getCurrency_code());
 		assertEquals("Expected value: ", new BigDecimal("0.75"), product.getCurrent_price().getValue());
 	}
 	
+	/**
+	 * This tests the scenario when a Product is not found
+	 * @throws JsonProcessingException
+	 * @throws IOException
+	 */
 	@Test
 	public void test_findProductById_null() throws JsonProcessingException, IOException {
 		Product product = service.findProductById(new BigInteger("123456789"));
 		assertNull("Product should be null ", product);
 	}
 	
+	/**
+	 * This tests the scenario when a Product is found and is updated
+	 * @throws JsonProcessingException
+	 * @throws IOException
+	 */
 	@Test
 	public void test_updateProductById_true() throws JsonProcessingException, IOException {
 		Price newPrice = new Price(new BigInteger("16696652"), new BigDecimal("25.50"), "USD");
@@ -70,13 +85,18 @@ public class ProductServiceTest extends AbstractTest {
 		
 		// Assert updated price from repository
 		Price updatedPrice = priceRepository.findPriceById(new BigInteger("16696652"));
-		assertEquals("Expected currency code: ", "USD", updatedPrice.getCurrencycode());
+		assertEquals("Expected currency code: ", "USD", updatedPrice.getCurrency_code());
 		assertEquals("Expected value: ", new BigDecimal("25.50"), updatedPrice.getValue());
 		
 		// Rollback original values for id: 16696652
 		priceRepository.insertPriceById(new BigInteger("16696652"), new BigDecimal("0.75"), "USD");
 	}
 	
+	/**
+	 * This tests the scenario when a Product is not found and not updated
+	 * @throws JsonProcessingException
+	 * @throws IOException
+	 */
 	@Test
 	public void test_updateProductById_false() throws JsonProcessingException, IOException {
 		Price newPrice = new Price(new BigInteger("123456789"), new BigDecimal("25.50"), "USD");

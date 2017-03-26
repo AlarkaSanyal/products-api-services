@@ -14,6 +14,11 @@ import org.springframework.data.cassandra.mapping.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+/**
+ * This class represents a Price.
+ *
+ */
+
 @Table
 @JsonIgnoreProperties(ignoreUnknown = true, value = "id")
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -29,16 +34,22 @@ public class Price {
 	
 	@NotNull
 	@AcceptableCurrencyCode(message = Constants.CURRENCY_CODE_MESSAGE)
-	private String currencycode;
+	private String currency_code;
 	
 	public Price() {
-		super();
+		
 	}
-
-	public Price(BigInteger id, BigDecimal value, String currencycode) {
+	
+	/**
+	 * This constructs a Price with id, value and currency_code
+	 * @param id
+	 * @param value
+	 * @param currency_code
+	 */
+	public Price(BigInteger id, BigDecimal value, String currency_code) {
 		this.id = id;
 		this.value = value;
-		this.currencycode = currencycode;
+		this.currency_code = currency_code;
 	}
 	
 	public BigInteger getId() {
@@ -56,13 +67,13 @@ public class Price {
 	public void setValue(BigDecimal value) {
 		this.value = value;
 	}
-	
-	public String getCurrencycode() {
-		return currencycode;
+
+	public String getCurrency_code() {
+		return currency_code;
 	}
-	
-	public void setCurrencycode(String currencycode) {
-		this.currencycode = currencycode;
+
+	public void setCurrency_code(String currency_code) {
+		this.currency_code = currency_code;
 	}
 	
 }

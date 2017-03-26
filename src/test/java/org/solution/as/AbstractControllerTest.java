@@ -14,6 +14,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import groovy.json.JsonSlurper;
 
+/**
+ * This is the parent class for the Integration tests.
+ *
+ */
+
 @WebAppConfiguration
 public abstract class AbstractControllerTest extends AbstractTest {
 

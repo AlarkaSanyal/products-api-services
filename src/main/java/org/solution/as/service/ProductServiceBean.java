@@ -19,6 +19,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * This is the main service class.
+ *
+ */
+
 @Service
 @PropertySource(value={"classpath:/config/application.properties"})
 public class ProductServiceBean implements ProductService {
@@ -32,14 +37,26 @@ public class ProductServiceBean implements ProductService {
 	@Value("${external.api.url.excludes.fields}")
 	private String excludeFields;
 	
+	/**
+	 * This method updates (deletes and inserts new) the price of a Product
+	 * @param id
+	 * @param price
+	 */
 	private void updatePrice(BigInteger id, Price price) {
 		// Delete the existing record
 		priceRepository.deletePriceById(id);
 		
 		// Insert new price
-		priceRepository.insertPriceById(id, price.getValue(), price.getCurrencycode());
+		priceRepository.insertPriceById(id, price.getValue(), price.getCurrency_code());
 	}
 	
+	/**
+	 * This method calls an external API to retrieve the name of a product.
+	 * @param id
+	 * @return name of a product
+	 * @throws JsonProcessingException
+	 * @throws IOException
+	 */
 	private String getProductName(BigInteger id) throws JsonProcessingException, IOException {
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<String> response = null;
@@ -71,6 +88,13 @@ public class ProductServiceBean implements ProductService {
 		return title;
 	} 
 	
+	/**
+	 * This method aggregates product data from multiple (price database and external API call) sources
+	 * @param price
+	 * @return Product object
+	 * @throws JsonProcessingException
+	 * @throws IOException
+	 */
 	private Product getProduct(Price price) throws JsonProcessingException, IOException {
 		String productName = getProductName(price.getId());
 		return new Product(price.getId(), productName, price);

@@ -16,6 +16,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.cassandra.config.java.AbstractCassandraConfiguration;
 import org.springframework.data.cassandra.core.CassandraOperations;
 
+/**
+ * This class configures Cassandra by creating a table in a keyspace and adding values to it.
+ *
+ */
+
 @Configuration
 public class CassandraConfig extends AbstractCassandraConfiguration {
 
@@ -55,23 +60,30 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
 		keySpace.ifNotExists(true).createKeyspace().withNetworkReplication(dataCenter);
 		return keySpace;
 	}
-	
+	/**
+	 * This method creates a table and adds data to it.
+	 * @throws FileNotFoundException
+	 */
 	@PostConstruct
 	public void createAndAddTable() throws FileNotFoundException {
 		
 		// Schema
-		cassandraTemplate.execute("CREATE TABLE IF NOT EXISTS price(id bigint PRIMARY KEY, value decimal, currencycode text);");
+		cassandraTemplate.execute("CREATE TABLE IF NOT EXISTS price(id bigint PRIMARY KEY, value decimal, currency_code text);");
 		
 		// Data
-		cassandraTemplate.execute("INSERT INTO price (id, value, currencycode) VALUES (15117729, 25.25, 'USD');");
-		cassandraTemplate.execute("INSERT INTO price (id, value, currencycode) VALUES (16483589, 5000.50, 'USD');");
-		cassandraTemplate.execute("INSERT INTO price (id, value, currencycode) VALUES (16696652, 0.75, 'USD');");
-		cassandraTemplate.execute("INSERT INTO price (id, value, currencycode) VALUES (16752456, 99, 'USD');");
-		cassandraTemplate.execute("INSERT INTO price (id, value, currencycode) VALUES (15643793, 99.99, 'USD');");
-		cassandraTemplate.execute("INSERT INTO price (id, value, currencycode) VALUES (13860428, 16.65, 'USD');");
+		cassandraTemplate.execute("INSERT INTO price (id, value, currency_code) VALUES (15117729, 25.25, 'USD');");
+		cassandraTemplate.execute("INSERT INTO price (id, value, currency_code) VALUES (16483589, 5000.50, 'USD');");
+		cassandraTemplate.execute("INSERT INTO price (id, value, currency_code) VALUES (16696652, 0.75, 'USD');");
+		cassandraTemplate.execute("INSERT INTO price (id, value, currency_code) VALUES (16752456, 99, 'USD');");
+		cassandraTemplate.execute("INSERT INTO price (id, value, currency_code) VALUES (15643793, 99.99, 'USD');");
+		cassandraTemplate.execute("INSERT INTO price (id, value, currency_code) VALUES (13860428, 16.65, 'USD');");
 				
 	}
 	
+	/**
+	 * This method drops a table once the application is closed.
+	 * @throws FileNotFoundException
+	 */
 	@PreDestroy
 	public void dropTable() throws FileNotFoundException {
 		cassandraTemplate.execute("DROP TABLE IF EXISTS price;");		

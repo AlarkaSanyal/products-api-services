@@ -1,5 +1,10 @@
 package org.solution.as.common;
 
+/**
+ * This class contains static variables which are used throughout this project.
+ *
+ */
+
 public class Constants {
 
 	public static final String KEYSPACE = "mykeyspace";
