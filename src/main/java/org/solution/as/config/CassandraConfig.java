@@ -48,6 +48,7 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
 		return keySpaceSpecifications;
 	}
 	
+	@SuppressWarnings("static-access")
 	private CreateKeyspaceSpecification getKeyspaceSpecification() {
 		CreateKeyspaceSpecification keySpace = new CreateKeyspaceSpecification();
 		DataCenterReplication dataCenter = new DataCenterReplication("datacenter1", 3L);
