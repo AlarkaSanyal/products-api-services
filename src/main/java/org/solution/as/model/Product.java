@@ -1,0 +1,69 @@
+package org.solution.as.model;
+
+import java.math.BigInteger;
+import javax.validation.Valid;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Product {
+
+	@NotNull
+	@Digits(integer = 10, fraction = 0, message="Only 10 digit long numbers allowed")
+	private BigInteger id;
+	
+	private String message;
+	
+	private String name;
+	
+	@Valid
+	private Price current_price;
+	
+	public Product() {
+		
+	}
+	
+	public Product(String message) {
+		this.message = message;
+	}
+
+	public Product(BigInteger id, String name, Price current_price) {
+		this.id = id;
+		this.name = name;
+		this.current_price = current_price;
+	}
+	
+	public BigInteger getId() {
+		return id;
+	}
+	
+	public void setId(BigInteger id) {
+		this.id = id;
+	}
+	
+	public String getMessage() {
+		return message;
+	}
+	
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public Price getCurrent_price() {
+		return current_price;
+	}
+	
+	public void setCurrent_price(Price current_price) {
+		this.current_price = current_price;
+	}
+	
+}

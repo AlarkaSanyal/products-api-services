@@ -1,0 +1,13 @@
+org\solution\as\service\ProductServiceBean.class
+org\solution\as\annotations\AcceptableCurrencyCode.class
+org\solution\as\service\ProductService.class
+org\solution\as\repository\PriceRepository.class
+org\solution\as\config\SwaggerConfig.class
+org\solution\as\annotations\CurrencyCode.class
+org\solution\Application.class
+org\solution\as\controller\ControllerExceptionHandler.class
+org\solution\as\annotations\CurrencyCodeValidator.class
+org\solution\as\model\Price.class
+org\solution\as\model\Product.class
+org\solution\as\controller\ProductController.class
+org\solution\as\config\CassandraConfig.class
