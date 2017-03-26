@@ -2,6 +2,8 @@ package org.solution.as.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.solution.as.common.Constants;
 import org.solution.as.model.Product;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +27,7 @@ public class ControllerExceptionHandler {
 			}
 			return new ResponseEntity<Product>(new Product(errorMessage.toString()), HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<Product>(new Product("Only numbers accepted for id or price value"), HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<Product>(new Product(Constants.CHECK_REQUEST), HttpStatus.BAD_REQUEST);
 	}
 	
 }

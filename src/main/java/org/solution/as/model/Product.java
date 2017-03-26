@@ -4,13 +4,16 @@ import java.math.BigInteger;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
+
+import org.solution.as.common.Constants;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Product {
 
 	@NotNull
-	@Digits(integer = 10, fraction = 0, message="Only 10 digit long numbers allowed")
+	@Digits(integer = 10, fraction = 0, message = Constants.ID_MESSAGE)
 	private BigInteger id;
 	
 	private String message;

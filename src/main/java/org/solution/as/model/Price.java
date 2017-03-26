@@ -7,6 +7,7 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
 import org.solution.as.annotations.AcceptableCurrencyCode;
+import org.solution.as.common.Constants;
 import org.springframework.data.cassandra.mapping.PrimaryKey;
 import org.springframework.data.cassandra.mapping.Table;
 
@@ -19,15 +20,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class Price {
 	
 	@PrimaryKey
-	@Digits(integer = 10, fraction = 0, message="Only 10 digit long numbers allowed")
+	@Digits(integer = 10, fraction = 0, message = Constants.ID_MESSAGE)
 	private BigInteger id;
 	
 	@NotNull
-	@Digits(integer = 100, fraction = 2, message="Currency format accepted only. e.g.: 10, 0.50, 10.50")
+	@Digits(integer = 100, fraction = 2, message = Constants.PRICE_MESSAGE)
 	private BigDecimal value;
 	
 	@NotNull
-	@AcceptableCurrencyCode(message = "Currency Code is not supported")
+	@AcceptableCurrencyCode(message = Constants.CURRENCY_CODE_MESSAGE)
 	private String currencycode;
 	
 	public Price() {

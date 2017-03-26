@@ -192,6 +192,23 @@ public class ProductControllerMocksTest extends AbstractControllerTest {
 	}
 	
 	@Test
+	public void test_updateProductPrice_withInvalidPriceValue_BadRequest() throws Exception {
+		String uri = "/api/products/{id}";
+		BigInteger id = new BigInteger("16696652");
+		Product product = getProductObject(id, "Test product name", new BigDecimal("100.7559"), "USD");
+		
+		MvcResult result = mvc.perform(MockMvcRequestBuilders.put(uri, id)
+															.contentType(MediaType.APPLICATION_JSON)
+															.accept(MediaType.APPLICATION_JSON)
+															.content(super.mapToJson(product)))
+														.andReturn();
+		
+		int status = result.getResponse().getStatus();
+		
+		assertEquals("Response status ", 400, status);
+	}
+	
+	@Test
 	public void test_updateProductPrice_withPriceCurrencyCode_caseSensitive_BadRequest() throws Exception {
 		String uri = "/api/products/{id}";
 		BigInteger id = new BigInteger("16696652");
@@ -241,5 +258,4 @@ public class ProductControllerMocksTest extends AbstractControllerTest {
 		
 		assertEquals("Response status ", 400, status);
 	}
-
 }

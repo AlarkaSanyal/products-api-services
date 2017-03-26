@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+
+import org.solution.as.common.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cassandra.config.CassandraCqlClusterFactoryBean;
 import org.springframework.cassandra.config.DataCenterReplication;
@@ -17,9 +19,6 @@ import org.springframework.data.cassandra.core.CassandraOperations;
 @Configuration
 public class CassandraConfig extends AbstractCassandraConfiguration {
 
-	private static final String KEYSPACE = "mykeyspace";
-	private static final String NODE = "127.0.0.1";
-	
 	@Autowired
 	private CassandraOperations cassandraTemplate;
 	
@@ -28,13 +27,13 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
 	public CassandraCqlClusterFactoryBean cluster() {
 		CassandraCqlClusterFactoryBean bean = new CassandraCqlClusterFactoryBean();
 		bean.setKeyspaceCreations(getKeyspaceCreations());
-		bean.setContactPoints(NODE);
+		bean.setContactPoints(Constants.NODE);
 		return bean;
 	}
 	
 	@Override
 	public String getKeyspaceName() {
-		return KEYSPACE;
+		return Constants.KEYSPACE;
 	}
 	
 	@Override
@@ -52,7 +51,7 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
 	private CreateKeyspaceSpecification getKeyspaceSpecification() {
 		CreateKeyspaceSpecification keySpace = new CreateKeyspaceSpecification();
 		DataCenterReplication dataCenter = new DataCenterReplication("datacenter1", 3L);
-		keySpace.name(KEYSPACE);
+		keySpace.name(Constants.KEYSPACE);
 		keySpace.ifNotExists(true).createKeyspace().withNetworkReplication(dataCenter);
 		return keySpace;
 	}
