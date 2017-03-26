@@ -1,7 +1,7 @@
 # Products API
-### Description
+## Description
 This project responds to the following http GET and PUT requests to deliver product data as JSON or update a product’s price in the data store.
-#### GET
+### GET
 Delivers product data as JSON.
 
     ** URL: /api/products/{id}
@@ -11,7 +11,7 @@ Delivers product data as JSON.
      * URL: /api/products/13860428
      * Response: {"id":13860428,"name":"The Big Lebowski (Blu-ray)","current_price":{"value":16.65,"currencycode":"USD"}}
      
-#### PUT
+### PUT
 Updates a product’s price in the data store.
 
     ** URL: /api/products/{id}
@@ -23,15 +23,15 @@ Updates a product’s price in the data store.
      * Request body: {"id":13860428,"name":"The Big Lebowski (Blu-ray)","current_price":{"value":29.50,"currencycode":"USD"}}
      * Response: {"message":"Price has been updated"}
 
-##### Response codes
+#### Response codes
 * **200 OK** : Product is found/updated
 * **404 Not Found**: Product is not found in database
 * **304 Not modified**: Product price is not updated
 * **400 Bad request**: URL/request body has incorrect format
 
-### Pre requisites
+## Pre requisites
 * Maven is installed
 * Cassandra is installed
 
-### Notes
+## Notes
 Tomcat server port is set to 8014. This can be changed in resources/config/application.properties file.
