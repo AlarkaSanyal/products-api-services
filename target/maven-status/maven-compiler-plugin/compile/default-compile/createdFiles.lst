@@ -1,8 +1,8 @@
+org\solution\as\common\Constants.class
 org\solution\as\service\ProductServiceBean.class
 org\solution\as\annotations\AcceptableCurrencyCode.class
 org\solution\as\service\ProductService.class
 org\solution\as\repository\PriceRepository.class
-org\solution\as\config\SwaggerConfig.class
 org\solution\as\annotations\CurrencyCode.class
 org\solution\Application.class
 org\solution\as\controller\ControllerExceptionHandler.class
