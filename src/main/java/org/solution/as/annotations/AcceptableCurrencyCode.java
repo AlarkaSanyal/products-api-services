@@ -15,7 +15,7 @@ import javax.validation.Payload;
 @Documented
 public @interface AcceptableCurrencyCode {
 
-	String message();
+	String message() default "";
 
     Class<?>[] groups() default {};
 

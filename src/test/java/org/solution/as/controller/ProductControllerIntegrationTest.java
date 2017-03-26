@@ -27,7 +27,6 @@ public class ProductControllerIntegrationTest extends AbstractControllerTest {
 	@Before
 	public void setUp() {
 		super.setUp();
-		productService.emptyCache();
 	}
 	
 	/**
@@ -58,7 +57,6 @@ public class ProductControllerIntegrationTest extends AbstractControllerTest {
 	 * This tests that the GET method returns status 404 (Not Found) when a Product is not found
 	 * @throws Exception
 	 */
-	@SuppressWarnings("unchecked")
 	@Test
 	public void test_getProduct_notFound() throws Exception {
 		String uri = "/api/products/{id}";
@@ -66,14 +64,9 @@ public class ProductControllerIntegrationTest extends AbstractControllerTest {
 		
 		MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri, id).accept(MediaType.APPLICATION_JSON)).andReturn();
 		
-		String content = result.getResponse().getContentAsString();
 		int status = result.getResponse().getStatus();
 		
-		Map<String, Object> jsonObject = (Map<String, Object>) jsonSlurper.parseText(content);
-		
 		assertEquals("Response status ", 404, status);
-		assertTrue("Response body should not be null", content.trim().length() > 0);
-		assertEquals("Message ", "Item not found", jsonObject.get("message"));
 	}
 	
 	/**
@@ -96,7 +89,6 @@ public class ProductControllerIntegrationTest extends AbstractControllerTest {
 	 * This tests that the PUT method returns status 200 (Not Found) when a Product is updated
 	 * @throws Exception
 	 */
-	@SuppressWarnings("unchecked")
 	@Test
 	public void test_updateProductPrice_ok() throws Exception {
 		String uri = "/api/products/{id}";
@@ -110,14 +102,9 @@ public class ProductControllerIntegrationTest extends AbstractControllerTest {
 															.content(super.mapToJson(updatedProduct)))
 														.andReturn();
 		
-		String content = result.getResponse().getContentAsString();
 		int status = result.getResponse().getStatus();
 		
-		Map<String, Object> jsonObject = (Map<String, Object>) jsonSlurper.parseText(content);
-		
 		assertEquals("Response status ", 200, status);
-		assertTrue("Response body should not be null", content.trim().length() > 0);
-		assertEquals("Message ", "Price has been updated", jsonObject.get("message"));
 		
 		//Rollback
 		mvc.perform(MockMvcRequestBuilders.put(uri, id)
@@ -131,7 +118,6 @@ public class ProductControllerIntegrationTest extends AbstractControllerTest {
 	 * This tests that the PUT method returns status 200 (Not Found) when a Product is updated but request body "name" field did not different from what is retrieved using GET request
 	 * @throws Exception
 	 */
-	@SuppressWarnings("unchecked")
 	@Test
 	public void test_updateProductPrice_withNotMatchingName_ok() throws Exception {
 		String uri = "/api/products/{id}";
@@ -145,14 +131,9 @@ public class ProductControllerIntegrationTest extends AbstractControllerTest {
 															.content(super.mapToJson(updatedProduct)))
 														.andReturn();
 		
-		String content = result.getResponse().getContentAsString();
 		int status = result.getResponse().getStatus();
 		
-		Map<String, Object> jsonObject = (Map<String, Object>) jsonSlurper.parseText(content);
-		
 		assertEquals("Response status ", 200, status);
-		assertTrue("Response body should not be null", content.trim().length() > 0);
-		assertEquals("Message ", "Price has been updated", jsonObject.get("message"));
 		
 		//Rollback
 		mvc.perform(MockMvcRequestBuilders.put(uri, id)
@@ -166,7 +147,6 @@ public class ProductControllerIntegrationTest extends AbstractControllerTest {
 	 * This tests that the PUT method returns status 200 (Not Found) when a Product is updated but request body did not have "name" field
 	 * @throws Exception
 	 */
-	@SuppressWarnings("unchecked")
 	@Test
 	public void test_updateProductPrice_withoutName_ok() throws Exception {
 		String uri = "/api/products/{id}";
@@ -180,14 +160,9 @@ public class ProductControllerIntegrationTest extends AbstractControllerTest {
 															.content(super.mapToJson(updatedProduct)))
 														.andReturn();
 		
-		String content = result.getResponse().getContentAsString();
 		int status = result.getResponse().getStatus();
 		
-		Map<String, Object> jsonObject = (Map<String, Object>) jsonSlurper.parseText(content);
-		
 		assertEquals("Response status ", 200, status);
-		assertTrue("Response body should not be null", content.trim().length() > 0);
-		assertEquals("Message ", "Price has been updated", jsonObject.get("message"));
 		
 		//Rollback
 		mvc.perform(MockMvcRequestBuilders.put(uri, id)

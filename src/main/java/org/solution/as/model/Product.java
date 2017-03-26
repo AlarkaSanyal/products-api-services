@@ -4,9 +4,6 @@ import java.math.BigInteger;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
-
-import org.solution.as.common.Constants;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 /** 
@@ -18,10 +15,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class Product {
 
 	@NotNull
-	@Digits(integer = 10, fraction = 0, message = Constants.ID_MESSAGE)
+	@Digits(integer = 10, fraction = 0)
 	private BigInteger id;
-	
-	private String message;
 	
 	private String name;
 	
@@ -31,14 +26,7 @@ public class Product {
 	public Product() {
 		
 	}
-	/**
-	 * This constructs a Product with just a message 
-	 * @param message
-	 */
-	public Product(String message) {
-		this.message = message;
-	}
-
+	
 	/**
 	 * This constructs a Product with id, name and Price
 	 * @param id
@@ -57,14 +45,6 @@ public class Product {
 	
 	public void setId(BigInteger id) {
 		this.id = id;
-	}
-	
-	public String getMessage() {
-		return message;
-	}
-	
-	public void setMessage(String message) {
-		this.message = message;
 	}
 	
 	public String getName() {

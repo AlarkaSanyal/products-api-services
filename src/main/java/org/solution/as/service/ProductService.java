@@ -21,11 +21,5 @@ public interface ProductService {
 	 * @param newProduct
 	 * @return true if price is updated, else false
 	 */
-	boolean updateProductById(Product newProduct);
-	
-	/**
-	 * Emptys the cache
-	 */
-	public void emptyCache();
-	
+	boolean updateProductById(Product newProduct);	
 }

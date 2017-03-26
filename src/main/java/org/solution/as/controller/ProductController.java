@@ -3,8 +3,6 @@ package org.solution.as.controller;
 import java.io.IOException;
 import java.math.BigInteger;
 import javax.validation.Valid;
-
-import org.solution.as.common.Constants;
 import org.solution.as.model.Product;
 import org.solution.as.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +43,7 @@ public class ProductController {
 	public ResponseEntity<Product> getProduct(@PathVariable("id") BigInteger id) throws JsonProcessingException, IOException, MethodArgumentTypeMismatchException {
 		Product product = productService.findProductById(id);
 		if (product == null) {
-			return new ResponseEntity<Product>(new Product(Constants.ITEM_NOT_FOUND), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Product>(product, HttpStatus.OK);
 	}
@@ -67,6 +65,6 @@ public class ProductController {
 		if (!priceUpdated) {
 			return new ResponseEntity<Product>(HttpStatus.NOT_MODIFIED);
 		}
-		return new ResponseEntity<Product>(new Product(Constants.PRICE_UPDATED), HttpStatus.OK);
+		return new ResponseEntity<Product>(HttpStatus.OK);
 	}
 }

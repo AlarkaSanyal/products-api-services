@@ -7,7 +7,6 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
 import org.solution.as.annotations.AcceptableCurrencyCode;
-import org.solution.as.common.Constants;
 import org.springframework.data.cassandra.mapping.PrimaryKey;
 import org.springframework.data.cassandra.mapping.Table;
 
@@ -25,15 +24,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class Price {
 	
 	@PrimaryKey
-	@Digits(integer = 10, fraction = 0, message = Constants.ID_MESSAGE)
+	@Digits(integer = 10, fraction = 0)
 	private BigInteger id;
 	
 	@NotNull
-	@Digits(integer = 100, fraction = 2, message = Constants.PRICE_MESSAGE)
+	@Digits(integer = 100, fraction = 2)
 	private BigDecimal value;
 	
 	@NotNull
-	@AcceptableCurrencyCode(message = Constants.CURRENCY_CODE_MESSAGE)
+	@AcceptableCurrencyCode
 	private String currency_code;
 	
 	public Price() {

@@ -9,5 +9,5 @@ C:\Users\Alarka\projects\products-api-services\src\main\java\org\solution\as\com
 C:\Users\Alarka\projects\products-api-services\src\main\java\org\solution\as\annotations\AcceptableCurrencyCode.java
 C:\Users\Alarka\projects\products-api-services\src\main\java\org\solution\as\annotations\CurrencyCode.java
 C:\Users\Alarka\projects\products-api-services\src\main\java\org\solution\as\config\CassandraConfig.java
-C:\Users\Alarka\projects\products-api-services\src\main\java\org\solution\as\controller\ControllerExceptionHandler.java
+C:\Users\Alarka\projects\products-api-services\src\main\java\org\solution\as\exception\ControllerExceptionHandler.java
 C:\Users\Alarka\projects\products-api-services\src\main\java\org\solution\as\model\Price.java
