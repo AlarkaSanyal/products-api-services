@@ -1,6 +1,6 @@
 # Products API
 ## Description
-This project responds to the following http GET and PUT requests to deliver product data as JSON or update a product’s price in the data store.
+This project responds to the following http GET and PUT requests to deliver product data as JSON or update a product’s price in the database.
 ### GET
 Delivers product data as JSON.
 
