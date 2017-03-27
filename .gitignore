@@ -1,10 +1,6 @@
 .gitignore
 .settings
-
 .classpath
-
 .project
-
 target
-
 doc
