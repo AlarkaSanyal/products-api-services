@@ -5,7 +5,7 @@ This project responds to the following http GET and PUT requests to deliver prod
 Delivers product data as JSON.
 
     ** URL: /api/products/{id}
-    ** URL Params: id=[number]
+    ** URL Params: id
     
     ** Example:
      * URL: /api/products/13860428
@@ -15,17 +15,17 @@ Delivers product data as JSON.
 Updates a product’s price in the database.
 
     ** URL: /api/products/{id}
-    ** URL Params: id=[number]
+    ** URL Params: id
     ** Request body: JSON, similar to the GET response
     
     ** Example:
      * URL: /api/products/13860428
      * Request body: {"id":13860428,"name":"The Big Lebowski (Blu-ray)","current_price":{"value":29.50,"currencycode":"USD"}}
 ### Variables
-* **id** = number, null not allowed
-* **name** = string, null allowed
-* **value** = number, price format (e.g.: 10.25, 100, 99.99, 0.75), null not allowed
-* **currency_code** = "USD" (string, case sensitive), null not allowed
+* **id** : number, null not allowed
+* **name** : string, null allowed
+* **value** : number, price format (e.g.: 10.25, 100, 99.99, 0.75), null not allowed
+* **currency_code** : "USD" (string, case sensitive), null not allowed
 ### Response codes
 * **200 OK** : Product is found/updated
 * **404 Not Found**: Product is not found in database
