@@ -21,7 +21,11 @@ Updates a product’s price in the database.
     ** Example:
      * URL: /api/products/13860428
      * Request body: {"id":13860428,"name":"The Big Lebowski (Blu-ray)","current_price":{"value":29.50,"currencycode":"USD"}}
-
+### Variables
+* **id** = number
+* **name** = string
+* **value** = number, price format (e.g.: 10.25, 100, 99.99, 0.75)
+* **currency_code** = "USD" (string, case sensitive)
 ### Response codes
 * **200 OK** : Product is found/updated
 * **404 Not Found**: Product is not found in database
