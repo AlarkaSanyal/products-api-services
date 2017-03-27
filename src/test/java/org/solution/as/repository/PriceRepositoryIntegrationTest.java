@@ -5,8 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Collection;
 import org.junit.Test;
 import org.solution.as.AbstractTest;
@@ -47,10 +45,10 @@ public class PriceRepositoryIntegrationTest extends AbstractTest {
 	 */
 	@Test
 	public void test_findPriceById_true() {
-		Price price = priceRepository.findPriceById(new BigInteger("16696652"));
+		Price price = priceRepository.findPriceById(id);
 		assertNotNull("Price should not be empty", price);
 		assertEquals("Expected currency_code: ", "USD", price.getCurrency_code());
-		assertEquals("Expected value: ", new BigDecimal("0.75"), price.getValue());
+		assertEquals("Expected value: ", value, price.getValue());
 	}
 	
 	/**
@@ -58,7 +56,7 @@ public class PriceRepositoryIntegrationTest extends AbstractTest {
 	 */
 	@Test
 	public void test_findPriceById_false() {
-		Price price = priceRepository.findPriceById(new BigInteger("123456789"));
+		Price price = priceRepository.findPriceById(id1);
 		assertNull("Price should be empty", price);
 	}
 	
@@ -67,15 +65,15 @@ public class PriceRepositoryIntegrationTest extends AbstractTest {
 	 */
 	@Test
 	public void test_updatePriceById_True() {
-		boolean updated = priceRepository.updatePriceById(new BigInteger("16696652"), new BigDecimal("50.50"));
+		boolean updated = priceRepository.updatePriceById(id, value1);
 		
 		assertTrue("Price should be updated", updated);
-		Price price = priceRepository.findPriceById(new BigInteger("16696652"));
+		Price price = priceRepository.findPriceById(id);
 		assertEquals("Expected currency_code: ", "USD", price.getCurrency_code());
-		assertEquals("Expected value: ", new BigDecimal("50.50"), price.getValue());
+		assertEquals("Expected value: ", value1, price.getValue());
 		
 		// Rollback
-		priceRepository.updatePriceById(new BigInteger("16696652"), new BigDecimal("0.75"));
+		priceRepository.updatePriceById(id, value);
 	}
 	
 	/**
@@ -83,10 +81,10 @@ public class PriceRepositoryIntegrationTest extends AbstractTest {
 	 */
 	@Test
 	public void test_updatePriceById_False() {
-		boolean updated = priceRepository.updatePriceById(new BigInteger("123456789"), new BigDecimal("50.50"));
+		boolean updated = priceRepository.updatePriceById(id1, value1);
 		
 		assertFalse("Price should be updated", updated);
-		Price price = priceRepository.findPriceById(new BigInteger("123456789"));
+		Price price = priceRepository.findPriceById(id1);
 		assertNull("Price should not be inserted", price);
 	}
 	

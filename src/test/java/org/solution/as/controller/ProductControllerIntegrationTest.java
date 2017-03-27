@@ -2,8 +2,6 @@ package org.solution.as.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,9 +34,6 @@ public class ProductControllerIntegrationTest extends AbstractControllerTest {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void test_getProduct_ok() throws Exception {
-		String uri = "/api/products/{id}";
-		BigInteger id = new BigInteger("16696652");
-		
 		MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri, id).accept(MediaType.APPLICATION_JSON)).andReturn();
 		
 		String content = result.getResponse().getContentAsString();
@@ -49,7 +44,7 @@ public class ProductControllerIntegrationTest extends AbstractControllerTest {
 		assertEquals("Response status ", 200, status);
 		assertTrue("Response body should not be null", content.trim().length() > 0);
 		assertEquals("id ", 16696652, jsonObject.get("id"));
-		assertEquals("Price value ", new BigDecimal("0.75"), ((Map<String, Object>)jsonObject.get("current_price")).get("value"));
+		assertEquals("Price value ", value, ((Map<String, Object>)jsonObject.get("current_price")).get("value"));
 		assertEquals("Price currency_code ", "USD", ((Map<String, Object>)jsonObject.get("current_price")).get("currency_code"));
 	}
 	
@@ -59,10 +54,7 @@ public class ProductControllerIntegrationTest extends AbstractControllerTest {
 	 */
 	@Test
 	public void test_getProduct_notFound() throws Exception {
-		String uri = "/api/products/{id}";
-		BigInteger id = new BigInteger("123456789");
-		
-		MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri, id).accept(MediaType.APPLICATION_JSON)).andReturn();
+		MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri, id1).accept(MediaType.APPLICATION_JSON)).andReturn();
 		
 		int status = result.getResponse().getStatus();
 		
@@ -75,7 +67,6 @@ public class ProductControllerIntegrationTest extends AbstractControllerTest {
 	 */
 	@Test
 	public void test_getProduct_idNotNumber() throws Exception {
-		String uri = "/api/products/{id}";
 		String id = "abcd";
 		
 		MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri, id).accept(MediaType.APPLICATION_JSON)).andReturn();
@@ -91,10 +82,8 @@ public class ProductControllerIntegrationTest extends AbstractControllerTest {
 	 */
 	@Test
 	public void test_updateProductPrice_ok() throws Exception {
-		String uri = "/api/products/{id}";
-		BigInteger id = new BigInteger("16696652");
 		Product product = productService.findProductById(id);
-		Product updatedProduct = getProductObject(product.getId(), product.getName(), new BigDecimal("100.25"), "USD");
+		Product updatedProduct = getProductObject(product.getId(), product.getName(), value1, "USD");
 		
 		MvcResult result = mvc.perform(MockMvcRequestBuilders.put(uri, id)
 															.contentType(MediaType.APPLICATION_JSON)
@@ -120,10 +109,8 @@ public class ProductControllerIntegrationTest extends AbstractControllerTest {
 	 */
 	@Test
 	public void test_updateProductPrice_withNotMatchingName_ok() throws Exception {
-		String uri = "/api/products/{id}";
-		BigInteger id = new BigInteger("16696652");
 		Product product = productService.findProductById(id);
-		Product updatedProduct = getProductObject(product.getId(), "New product name", new BigDecimal("100.25"), "USD");
+		Product updatedProduct = getProductObject(product.getId(), "New product name", value1, "USD");
 		
 		MvcResult result = mvc.perform(MockMvcRequestBuilders.put(uri, id)
 															.contentType(MediaType.APPLICATION_JSON)
@@ -149,10 +136,8 @@ public class ProductControllerIntegrationTest extends AbstractControllerTest {
 	 */
 	@Test
 	public void test_updateProductPrice_withoutName_ok() throws Exception {
-		String uri = "/api/products/{id}";
-		BigInteger id = new BigInteger("16696652");
 		Product product = productService.findProductById(id);
-		Product updatedProduct = getProductObject(product.getId(), null, new BigDecimal("100.25"), "USD");
+		Product updatedProduct = getProductObject(product.getId(), null, value1, "USD");
 		
 		MvcResult result = mvc.perform(MockMvcRequestBuilders.put(uri, id)
 															.contentType(MediaType.APPLICATION_JSON)
@@ -178,10 +163,8 @@ public class ProductControllerIntegrationTest extends AbstractControllerTest {
 	 */
 	@Test
 	public void test_updateProductPrice_idNotMatching_NotModified() throws Exception {
-		String uri = "/api/products/{id}";
-		BigInteger id = new BigInteger("16696652");
 		Product product = productService.findProductById(id);
-		Product updatedProduct = getProductObject(new BigInteger("123456789"), product.getName(), new BigDecimal("100.25"), "USD");
+		Product updatedProduct = getProductObject(id1, product.getName(), value1, "USD");
 		
 		MvcResult result = mvc.perform(MockMvcRequestBuilders.put(uri, id)
 															.contentType(MediaType.APPLICATION_JSON)
@@ -200,11 +183,9 @@ public class ProductControllerIntegrationTest extends AbstractControllerTest {
 	 */
 	@Test
 	public void test_updateProductPrice_idNotFound_NotModified() throws Exception {
-		String uri = "/api/products/{id}";
-		BigInteger id = new BigInteger("123456789");
-		Product updatedProduct = getProductObject(new BigInteger("123456789"), null, new BigDecimal("100.25"), "USD");
+		Product updatedProduct = getProductObject(id1, null, value1, "USD");
 		
-		MvcResult result = mvc.perform(MockMvcRequestBuilders.put(uri, id)
+		MvcResult result = mvc.perform(MockMvcRequestBuilders.put(uri, id1)
 															.contentType(MediaType.APPLICATION_JSON)
 															.accept(MediaType.APPLICATION_JSON)
 															.content(super.mapToJson(updatedProduct)))

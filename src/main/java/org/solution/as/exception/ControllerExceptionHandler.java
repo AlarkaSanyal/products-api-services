@@ -1,6 +1,7 @@
 package org.solution.as.exception;
 
 import org.solution.as.model.Product;
+import org.springframework.cassandra.support.exception.CassandraInvalidQueryException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -17,7 +18,11 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
-	@ExceptionHandler({MethodArgumentNotValidException.class, HttpMessageNotReadableException.class, MethodArgumentTypeMismatchException.class})
+	@ExceptionHandler(
+			{MethodArgumentNotValidException.class,
+			HttpMessageNotReadableException.class,
+			MethodArgumentTypeMismatchException.class,
+			CassandraInvalidQueryException.class})
 	public ResponseEntity<Product> handleErrors(Exception ex) {
 		return new ResponseEntity<Product>(HttpStatus.BAD_REQUEST);
 	}

@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import org.solution.as.model.Product;
 import org.solution.as.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cassandra.support.exception.CassandraInvalidQueryException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +41,8 @@ public class ProductController {
 	 * @throws MethodArgumentTypeMismatchException
 	 */
 	@RequestMapping(value="/api/products/{id}",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Product> getProduct(@PathVariable("id") BigInteger id) throws JsonProcessingException, IOException, MethodArgumentTypeMismatchException {
+	public ResponseEntity<Product> getProduct(@PathVariable("id") BigInteger id)
+			throws JsonProcessingException, IOException, MethodArgumentTypeMismatchException, CassandraInvalidQueryException {
 		Product product = productService.findProductById(id);
 		if (product == null) {
 			return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
@@ -57,7 +59,8 @@ public class ProductController {
 	 * @throws MethodArgumentNotValidException
 	 */
 	@RequestMapping(value="/api/products/{id}",method=RequestMethod.PUT,consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Product> updateProductPrice(@PathVariable("id") BigInteger id, @Valid @RequestBody Product product) throws HttpMessageNotReadableException, MethodArgumentNotValidException {
+	public ResponseEntity<Product> updateProductPrice(@PathVariable("id") BigInteger id, @Valid @RequestBody Product product)
+			throws HttpMessageNotReadableException, MethodArgumentNotValidException, CassandraInvalidQueryException {
 		if (!id.equals(product.getId())) {
 			return new ResponseEntity<Product>(HttpStatus.NOT_MODIFIED);
 		}

@@ -5,14 +5,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import org.junit.Test;
 import org.solution.as.AbstractTest;
 import org.solution.as.model.Price;
 import org.solution.as.model.Product;
 import org.solution.as.repository.PriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cassandra.support.exception.CassandraInvalidQueryException;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 /**
@@ -45,10 +45,10 @@ public class ProductServiceIntegrationTest extends AbstractTest {
 	 * @throws IOException
 	 */
 	@Test
-	public void test_findProductById() throws JsonProcessingException, IOException {
-		Product product = service.findProductById(new BigInteger("16696652"));
+	public void test_findProductById() throws JsonProcessingException, IOException, CassandraInvalidQueryException {
+		Product product = service.findProductById(id);
 		assertEquals("Expected currency code: ", "USD", product.getCurrent_price().getCurrency_code());
-		assertEquals("Expected value: ", new BigDecimal("0.75"), product.getCurrent_price().getValue());
+		assertEquals("Expected value: ", value, product.getCurrent_price().getValue());
 	}
 	
 	/**
@@ -57,8 +57,8 @@ public class ProductServiceIntegrationTest extends AbstractTest {
 	 * @throws IOException
 	 */
 	@Test
-	public void test_findProductById_null() throws JsonProcessingException, IOException {
-		Product product = service.findProductById(new BigInteger("123456789"));
+	public void test_findProductById_null() throws JsonProcessingException, IOException, CassandraInvalidQueryException {
+		Product product = service.findProductById(id1);
 		assertNull("Product should be null ", product);
 	}
 	
@@ -68,19 +68,19 @@ public class ProductServiceIntegrationTest extends AbstractTest {
 	 * @throws IOException
 	 */
 	@Test
-	public void test_updateProductById_true() throws JsonProcessingException, IOException {
-		Price newPrice = new Price(new BigInteger("16696652"), new BigDecimal("25.50"), "USD");
-		Product newProduct = new Product(new BigInteger("16696652"), "Update unit test", newPrice);
+	public void test_updateProductById_true() throws JsonProcessingException, IOException, CassandraInvalidQueryException {
+		Price newPrice = new Price(id, value1, "USD");
+		Product newProduct = new Product(id, "Update unit test", newPrice);
 		boolean updated = service.updateProductById(newProduct);
 		assertTrue("Price should be updated ", updated);
 		
 		// Assert updated price from repository
-		Price updatedPrice = priceRepository.findPriceById(new BigInteger("16696652"));
+		Price updatedPrice = priceRepository.findPriceById(id);
 		assertEquals("Expected currency_code: ", "USD", updatedPrice.getCurrency_code());
-		assertEquals("Expected value: ", new BigDecimal("25.50"), updatedPrice.getValue());
+		assertEquals("Expected value: ", value1, updatedPrice.getValue());
 		
 		// Rollback original values for id: 16696652
-		priceRepository.updatePriceById(new BigInteger("16696652"), new BigDecimal("0.75"));
+		priceRepository.updatePriceById(id, value);
 	}
 	
 	/**
@@ -89,9 +89,9 @@ public class ProductServiceIntegrationTest extends AbstractTest {
 	 * @throws IOException
 	 */
 	@Test
-	public void test_updateProductById_false() throws JsonProcessingException, IOException {
-		Price newPrice = new Price(new BigInteger("123456789"), new BigDecimal("25.50"), "USD");
-		Product newProduct = new Product(new BigInteger("123456789"), "Update unit test", newPrice);
+	public void test_updateProductById_false() throws JsonProcessingException, IOException, CassandraInvalidQueryException {
+		Price newPrice = new Price(id1, value, "USD");
+		Product newProduct = new Product(id1, "Update unit test", newPrice);
 		boolean updated = service.updateProductById(newProduct);
 		assertFalse("Price should NOT be updated ", updated);
 	}
