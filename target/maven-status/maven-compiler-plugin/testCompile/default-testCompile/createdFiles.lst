@@ -1,6 +1,0 @@
-org\solution\as\AbstractControllerTest.class
-org\solution\as\controller\ProductControllerTest.class
-org\solution\as\AbstractTest.class
-org\solution\as\service\ProductServiceIntegrationTest.class
-org\solution\as\controller\ProductControllerIntegrationTest.class
-org\solution\as\repository\PriceRepositoryIntegrationTest.class
