@@ -40,7 +40,7 @@ public class ProductController {
 	 * @throws IOException
 	 * @throws MethodArgumentTypeMismatchException
 	 */
-	@RequestMapping(value="/api/products/{id}",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/api/v1/products/{id}",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Product> getProduct(@PathVariable("id") BigInteger id)
 			throws JsonProcessingException, IOException, MethodArgumentTypeMismatchException, CassandraInvalidQueryException {
 		Product product = productService.findProductById(id);
@@ -58,7 +58,7 @@ public class ProductController {
 	 * @throws HttpMessageNotReadableException
 	 * @throws MethodArgumentNotValidException
 	 */
-	@RequestMapping(value="/api/products/{id}",method=RequestMethod.PUT,consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/api/v1/products/{id}",method=RequestMethod.PUT,consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Product> updateProductPrice(@PathVariable("id") BigInteger id, @Valid @RequestBody Product product)
 			throws HttpMessageNotReadableException, MethodArgumentNotValidException, CassandraInvalidQueryException {
 		if (!id.equals(product.getId())) {

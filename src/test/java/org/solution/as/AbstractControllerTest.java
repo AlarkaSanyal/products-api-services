@@ -24,7 +24,7 @@ public abstract class AbstractControllerTest extends AbstractTest {
 
 	protected MockMvc mvc;
 	protected JsonSlurper jsonSlurper;
-	protected String uri = "/api/products/{id}";
+	protected String uri = "/api/v1/products/{id}";
 	
 	@Autowired
 	protected WebApplicationContext webApplicationContext;

@@ -4,22 +4,22 @@ This project responds to the following http GET and PUT requests to deliver prod
 ### GET
 Delivers product data as JSON.
 
-    ** URL: /api/products/{id}
+    ** URL: /api/v1/products/{id}
     ** URL Params: id
     
     ** Example:
-     * URL: /api/products/13860428
+     * URL: /api/v1/products/13860428
      * Response: {"id":13860428,"name":"The Big Lebowski (Blu-ray)","current_price":{"value":16.65,"currencycode":"USD"}}
      
 ### PUT
 Updates a product’s price in the database.
 
-    ** URL: /api/products/{id}
+    ** URL: /api/v1/products/{id}
     ** URL Params: id
     ** Request body: JSON, similar to the GET response
     
     ** Example:
-     * URL: /api/products/13860428
+     * URL: /api/v1/products/13860428
      * Request body: {"id":13860428,"name":"The Big Lebowski (Blu-ray)","current_price":{"value":29.50,"currencycode":"USD"}}
 ### Variables
 * **id** : number, null not allowed
