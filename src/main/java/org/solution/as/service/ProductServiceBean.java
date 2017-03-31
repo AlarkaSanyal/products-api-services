@@ -36,10 +36,12 @@ public class ProductServiceBean implements ProductService {
 	
 	private RestTemplate restTemplate;
 	private ObjectMapper mapper;
+	private StringBuilder uri;
 	
 	public ProductServiceBean() {
 		restTemplate = new RestTemplate();
 		mapper = new ObjectMapper();
+		uri = new StringBuilder();
 	}
 
 	/**
@@ -53,7 +55,7 @@ public class ProductServiceBean implements ProductService {
 		ResponseEntity<String> response = null;
 		String title = null;
 		try {
-			response = restTemplate.getForEntity(this.url + id + this.excludeFields, String.class);
+			response = restTemplate.getForEntity(uri.append(this.url).append(id).append(this.excludeFields).toString(), String.class);
 		} catch (HttpClientErrorException ex) {
 			//Do nothing
 		}
